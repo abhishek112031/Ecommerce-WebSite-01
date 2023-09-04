@@ -7,22 +7,23 @@
     <link rel="stylesheet" href="boxicons/css/boxicons.min.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="/css/style.css">
-    <title>Ludiflex | Login & Registration</title>
+    <title>EcoFly | Login & Registration</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js"></script>
 </head>
 <body>
  <div class="wrapper">
     <nav class="nav">
         <div class="nav-logo">
-            <p>LOGO .</p>
+            <p>EcoFly</p>
         </div>
-        <!-- <div class="nav-menu" id="navMenu">
+        <div class="nav-menu" id="navMenu">
             <ul>
                 <li><a href="#" class="link active">Home</a></li>
                 <li><a href="#" class="link">Blog</a></li>
                 <li><a href="#" class="link">Services</a></li>
                 <li><a href="#" class="link">About</a></li>
             </ul>
-        </div> -->
+        </div>
         <div class="nav-button">
             <button class="btn white-btn" id="loginBtn" onclick="login()">Sign In</button>
             <button class="btn" id="registerBtn" onclick="register()">Sign Up</button>
@@ -72,24 +73,24 @@
             </div>
             <div class="two-forms">
                 <div class="input-box">
-                    <input type="text" class="input-field" placeholder="Firstname">
+                    <input id="fname" type="text" class="input-field" placeholder="Firstname">
                     <i class="bx bx-user"></i>
                 </div>
                 <div class="input-box">
-                    <input type="text" class="input-field" placeholder="Lastname">
+                    <input id="lname" type="text" class="input-field" placeholder="Lastname">
                     <i class="bx bx-user"></i>
                 </div>
             </div>
             <div class="input-box">
-                <input type="text" class="input-field" placeholder="Email">
+                <input id="email" type="text" class="input-field" placeholder="Email">
                 <i class="bx bx-envelope"></i>
             </div>
             <div class="input-box">
-                <input type="password" class="input-field" placeholder="Password">
+                <input id="password" type="password" class="input-field" placeholder="Password">
                 <i class="bx bx-lock-alt"></i>
             </div>
             <div class="input-box">
-                <input type="submit" class="submit" value="Register">
+                <input onclick="saveUserDetails(event)" type="submit" class="submit" value="Register">
             </div>
             <div class="two-col">
                 <div class="one">
@@ -144,6 +145,37 @@
         y.style.opacity = 1;
     }
 
+</script>
+
+
+
+<!-- main script -->
+<script>
+    async function saveUserDetails(event){
+        event.preventDefault()
+        try{
+            const userObj={
+                fname:document.getElementById('fname').value,
+                lname:document.getElementById('lname').value,
+                email:document.getElementById('email').value,
+                password:document.getElementById('password').value
+            }
+            const newUserResp=await axios.post('/sign-up',userObj);
+            // console.log(newUserResp.data);
+
+            if(newUserResp.status===201){
+                alert(newUserResp.data.message);
+                login();
+
+            }
+
+        }
+        catch(err){
+            alert(err.response.data.message);
+            // console.log(err)
+        }
+
+    }
 </script>
 
 </body>
