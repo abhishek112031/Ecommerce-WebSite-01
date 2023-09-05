@@ -19,9 +19,9 @@
         <div class="nav-menu" id="navMenu">
             <ul>
                 <li><a href="#" class="link active">Home</a></li>
-                <li><a href="#" class="link">Blog</a></li>
-                <li><a href="#" class="link">Services</a></li>
+                <li><a href="#" class="link">Find Products</a></li>
                 <li><a href="#" class="link">About</a></li>
+                <li><a href="#" class="link">Contact Us</a></li>
             </ul>
         </div>
         <div class="nav-button">
@@ -44,15 +44,15 @@
                 <header>Login</header>
             </div>
             <div class="input-box">
-                <input type="text" class="input-field" placeholder="Username or Email">
+                <input id="userEmail" type="text" class="input-field" placeholder="Username or Email">
                 <i class="bx bx-user"></i>
             </div>
             <div class="input-box">
-                <input type="password" class="input-field" placeholder="Password">
+                <input id="userPassword" type="password" class="input-field" placeholder="Password">
                 <i class="bx bx-lock-alt"></i>
             </div>
             <div class="input-box">
-                <input type="submit" class="submit" value="Sign In">
+                <input onclick="getLogIn()" type="submit" class="submit" value="Sign In">
             </div>
             <div class="two-col">
                 <div class="one">
@@ -175,6 +175,30 @@
             // console.log(err)
         }
 
+    }
+
+
+    async function getLogIn(){
+        try{
+            const obj={
+                email:document.getElementById('userEmail').value,
+                password:document.getElementById('userPassword').value,
+
+            }
+            const logInResp=await axios.post('/login',obj);
+            if(logInResp.status===200){
+                console.log(logInResp.data);
+                alert(logInResp.data.message);
+                window.location.href='/user-dashboard';
+            }
+           
+        
+        }
+        catch(err){
+            console.log(err)
+            alert(err.response.data.message);
+
+        }
     }
 </script>
 
