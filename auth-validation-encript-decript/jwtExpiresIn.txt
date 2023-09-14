@@ -1,0 +1,21 @@
+In JWT (JSON Web Tokens), the `expiresIn` option is used to specify how long a token is valid for, in terms of a time duration. You can specify this duration in various units such as hours (hr), seconds (s), days (d), and minutes (m). Here's an explanation of how to use these units with `expiresIn`:
+
+1. **Seconds (s):**
+- Example: `expiresIn: 60`
+- This token will expire in 60 seconds (1 minute) from the time it was issued.
+
+2. **Minutes (m):**
+- Example: `expiresIn: '15m'`
+- This token will expire in 15 minutes from the time it was issued.
+
+3. **Hours (hr):**
+- Example: `expiresIn: '2hr'`
+- This token will expire in 2 hours from the time it was issued.
+
+4. **Days (d):**
+- Example: `expiresIn: '7d'`
+- This token will expire in 7 days from the time it was issued.
+
+Using these units makes it convenient to specify the expiration time for a JWT in a human-readable format. The library you're using (such as `jsonwebtoken`) will handle the conversion of these units into seconds internally.
+
+Keep in mind that when you set an expiration time using `expiresIn`, the token will be considered invalid once that time duration has passed since its issuance. It's important to choose an appropriate expiration time based on your application's security requirements and the sensitivity of the data contained in the token. Shorter expiration times provide better security for sensitive operations, but they may require more frequent token renewal.
