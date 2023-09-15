@@ -6,7 +6,8 @@ const cookieParser = require('cookie-parser');
 const connectionURI = 'mongodb://0.0.0.0:27017/ecommerceWebSite-01';
 
 //routes:
-const userRoutes=require('./routes/user')
+const userRoutes=require('./routes/user');
+const adminRoutes=require('./routes/admin');
 
 const app = express();
 
@@ -20,6 +21,8 @@ app.use(cookieParser())
 
 //main middlewares:
 app.use(userRoutes);
+app.use(adminRoutes);
+
 
 
 

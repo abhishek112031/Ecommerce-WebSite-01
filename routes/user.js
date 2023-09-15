@@ -8,8 +8,10 @@ const verifyToken = require('../auth-validation-encript-decript/verifyToken');
 router.get('/sign-up',userController.getSignupUserPage);
 router.post('/sign-up',userController.postSignupUser);
 router.post('/login',userController.postLogIn);
-router.get('/user-dashboard',verifyToken.verifytoken,userController.userDashBoard);
+router.get('/user-dashboard',userController.userDashBoard);
 
+
+// /admin/all-products
 
 
 module.exports= router;
